@@ -27,26 +27,14 @@ class Movie {
     +equals(other: Movie): Boolean
 }
 
-class MovieSearchResult {
-    +page: Int
-    +results: Movie[*]
-    +total_pages: Int
-    +total_results: Int
-
-    +toString(): String
-    +equals(other: MovieSearchResult): Boolean
+class MovieDBImpl {
+    def getMovie(id: Int): Movie
+    def searchMovies(query: String): [Movie]
 }
 
-class MovieDBCall {
-    +base_url: String
-    +api_key: String
-    
-    +getMovie(id: Int): Movie
-    +searchMovies(query: String): MovieSearchResult
-}
-
-MovieDB <|.. MovieDBCall : implements
-MovieDBCall ..> MovieSearchResult : returns
-MovieSearchResult "1" *-- "0..*" Movie : contains >
+' Relaciones
+MovieDB <|.. MovieDBImpl : implements
+MovieDBImpl ..> Movie : returns
+Movie "1" *-- "0..*" Movie : contains >
 
 @enduml

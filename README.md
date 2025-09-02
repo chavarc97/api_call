@@ -12,4 +12,4 @@ En resumen, esta tarea fue una oportunidad para fortalecer habilidades técnicas
 
 ## DIAGRAMA
 
-![1756851916116](images/README/1756851916116.png)
+![image](images/README/image.png)
