@@ -1,0 +1,52 @@
+@startuml API call theMovieDB
+
+' Protocol / interface
+interface MovieDB << (P, #FFAAAA) >> {
+    +getMovie(id: Int): Movie
+    +searchMovies(query: String): MovieSearchResult
+}
+
+' Data classes
+class Movie {
+    +adult: Boolean
+    +backdrop_path: String
+    +genre_ids: Int[*]
+    +id: Int
+    +original_language: String
+    +original_title: String
+    +overview: String
+    +popularity: Float
+    +poster_path: String
+    +release_date: String
+    +title: String
+    +video: Boolean
+    +vote_average: Float
+    +vote_count: Int
+
+    +toString(): String
+    +equals(other: Movie): Boolean
+}
+
+class MovieSearchResult {
+    +page: Int
+    +results: Movie[*]
+    +total_pages: Int
+    +total_results: Int
+
+    +toString(): String
+    +equals(other: MovieSearchResult): Boolean
+}
+
+class MovieDBCall {
+    +base_url: String
+    +api_key: String
+    
+    +getMovie(id: Int): Movie
+    +searchMovies(query: String): MovieSearchResult
+}
+
+MovieDB <|.. MovieDBCall : implements
+MovieDBCall ..> MovieSearchResult : returns
+MovieSearchResult "1" *-- "0..*" Movie : contains >
+
+@enduml
